@@ -8,17 +8,17 @@ import MVCFramework.View;
 public class MenstrualEquityFactory implements AppFactory {
     @Override
     public Model makeModel() {
-        return null;
+        return new MenstrualEquity();
     }
 
     @Override
     public View makeView(Model m) {
-        return null;
+        return new MenstrualEquityView((MenstrualEquity) m);
     }
 
     @Override
     public String getTitle() {
-        return "";
+        return "MenstrualEquityApp";
     }
 
     @Override
