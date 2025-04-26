@@ -23,7 +23,7 @@ public class MenstrualEquityFactory implements AppFactory {
 
     @Override
     public String[] getHelp() {
-        return new String[0];
+        return new String[]{""};
     }
 
     @Override
