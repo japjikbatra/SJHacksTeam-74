@@ -1,4 +1,4 @@
-package src.MVCFramework;
+package MVCFramework;
 
 public abstract class Command {
     protected Model model;

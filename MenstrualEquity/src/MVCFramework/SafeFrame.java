@@ -1,4 +1,4 @@
-package src.MVCFramework;
+package MVCFramework;
 
 import javax.swing.*;
 import java.awt.event.WindowEvent;
