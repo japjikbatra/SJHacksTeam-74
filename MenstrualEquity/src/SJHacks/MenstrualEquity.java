@@ -19,7 +19,17 @@ public class MenstrualEquity extends Model {
     public Location getLocation(Sector sector){
         return locations.get(sector);
     }
-    
+
+    public ArrayList<Location> getLocations(String sec){
+        ArrayList<Location> locs = new ArrayList<>();
+        for (Sector key : locations.keySet()) {
+            if(key.name().equalsIgnoreCase(sec) ){
+                locs.add(locations.get(key));
+            }
+        }
+        return locs;
+    }
+
 
 
 
