@@ -10,14 +10,16 @@ import javax.swing.*;
 public class MenstrualEquityPanel extends AppPanel {
     JPanel langPanel;
     JPanel sectorPanel;
+    JPanel zonePanel;
     public MenstrualEquityPanel(AppFactory factory) {
         super(factory);
         this.factory = factory;
-
+        JLabel question = new JLabel("Please Select A Location");
+        controlPanel.add(question);
         //String language = Utilities.ask("Please Select A Language.");
         //String genericLocation = Utilities.ask("Which region of San Jose?");
-        String language = selectLanguage();
-        selectLocation();
+        //String language = selectLanguage();
+        String location = selectLocation();
     }
 
     private String selectLanguage(){
@@ -31,20 +33,53 @@ public class MenstrualEquityPanel extends AppPanel {
         return lang;
     }
 
-    private void selectLocation(){
-        sectorPanel = new JPanel();
-        String[] langOptions = {"Central San Jose", "North San Jose", "West San Jose", "South San Jose", "East San Jose"};
-        JComboBox<String> dropdown = new JComboBox<>(langOptions);
+    private String selectLocation(){
+        zonePanel = new JPanel();
+        String[] zoneOptions = {"CENTRAL SAN JOSE", "NORTH SAN JOSE", "WEST SAN JOSE", "SOUTH SAN JOSE", "EAST SAN JOSE"};
+        JComboBox<String> dropdown = new JComboBox<>(zoneOptions);
         zonePanel.add(dropdown);
+
         controlPanel.add(zonePanel);
+
         Object selected = dropdown.getSelectedItem();
         String zone = (String) selected;
-        if(zone.equals("Central San Jose")){
-            String[] sectors = {"Hyde Park", "Northside", "Japantown", "Civic Center", "Coleman", "The Alameda", "Rose Garden", "Shasta-Hanchett Park", "St. Leo's", "West San Carlos", "Midtown", "Washington-Guadalupe", "Tamien", "Alma", "Spartan Keyes", "Naglee Park", "Downtown"};
-            JComboBox<String> dropdown2 = new JComboBox<>(sectors);
-            zonePanel.add(dropdown2);
-            controlPanel.add(zonePanel);
+        JComboBox<String> dropdown2 = null;
+        if(zone.equals("CENTRAL SAN JOSE")){
+            sectorPanel = new JPanel();
+            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
+            dropdown2 = new JComboBox<>(centralSectors);
+            sectorPanel.add(dropdown2);
+            controlPanel.add(sectorPanel);
+        }else if(zone.equals("NORTH SAN JOSE")){
+            sectorPanel = new JPanel();
+            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
+            dropdown2 = new JComboBox<>(centralSectors);
+            sectorPanel.add(dropdown2);
+            controlPanel.add(sectorPanel);
+        }else if(zone.equals("SOUTH SAN JOSE")){
+            sectorPanel = new JPanel();
+            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
+            dropdown2 = new JComboBox<>(centralSectors);
+            sectorPanel.add(dropdown2);
+            controlPanel.add(sectorPanel);
+        }else if(zone.equals("EAST SAN JOSE")){
+            sectorPanel = new JPanel();
+            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
+            dropdown2 = new JComboBox<>(centralSectors);
+            sectorPanel.add(dropdown2);
+            controlPanel.add(sectorPanel);
+        }else if(zone.equals("WEST SAN JOSE")){
+            sectorPanel = new JPanel();
+            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
+            dropdown2 = new JComboBox<>(centralSectors);
+            sectorPanel.add(dropdown2);
+            controlPanel.add(sectorPanel);
+        }else{
+            return null;
         }
+        Object location = dropdown2.getSelectedItem();
+        String selectedLocation = (String) location;
+        return selectedLocation;
     }
 
     //private voi
