@@ -35,51 +35,13 @@ public class MenstrualEquityPanel extends AppPanel {
 
     private String selectLocation(){
         zonePanel = new JPanel();
-        String[] zoneOptions = {"CENTRAL SAN JOSE", "NORTH SAN JOSE", "WEST SAN JOSE", "SOUTH SAN JOSE", "EAST SAN JOSE"};
+        String[] zoneOptions = {"ALVISO", "BERRYESSA", "RINCONGOLDENTRIANGLE", "RINCONSOUTH", "AIRPORT", "ALUMROCK", "EVERGREEN", "SILVERCREEKVALLEY", "LITTLEPORTUGAL", "OLINDERBONITA", "LITTLESAIGON", "STORYANDKING", "YERBABUENA", "MCLAUGHLIN", "NORTHMONTEREY", "SEVENTREEW", "EDENVALE", "BASKINGRIDGE", "SANTATERESA", "BLOSSOMVALLEY", "ALMADEN", "CANOAS", "COMMUNICATIONSHILL", "WILLOWGLEN", "CAMBRIAN", "BASCOM", "FRUITDALE", "WINCHESTER", "PASEODESARATOGA", "CALABAZAS", "STEVENSCREEK", "SANTANAROWVALLEYFAIR", "DOWNTOWN", "ALMA", "COLEMAN", "CIVICCENTER", "HYDEPARK", "JAPANTOWN", "MIDTOWN", "NAGLEEPARK", "NORTHSIDE", "SPARTANKEYES", "SANTOMASAQUINO", "TAMIEN", "THEALAMEDA", "WASHINGTONGUADALUPE", "STLEOS", "ROSEGARDEN", "SHASTAHANCHETTPARK"};
         JComboBox<String> dropdown = new JComboBox<>(zoneOptions);
         zonePanel.add(dropdown);
-
         controlPanel.add(zonePanel);
-
         Object selected = dropdown.getSelectedItem();
         String zone = (String) selected;
-        JComboBox<String> dropdown2 = null;
-        if(zone.equals("CENTRAL SAN JOSE")){
-            sectorPanel = new JPanel();
-            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
-            dropdown2 = new JComboBox<>(centralSectors);
-            sectorPanel.add(dropdown2);
-            controlPanel.add(sectorPanel);
-        }else if(zone.equals("NORTH SAN JOSE")){
-            sectorPanel = new JPanel();
-            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
-            dropdown2 = new JComboBox<>(centralSectors);
-            sectorPanel.add(dropdown2);
-            controlPanel.add(sectorPanel);
-        }else if(zone.equals("SOUTH SAN JOSE")){
-            sectorPanel = new JPanel();
-            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
-            dropdown2 = new JComboBox<>(centralSectors);
-            sectorPanel.add(dropdown2);
-            controlPanel.add(sectorPanel);
-        }else if(zone.equals("EAST SAN JOSE")){
-            sectorPanel = new JPanel();
-            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
-            dropdown2 = new JComboBox<>(centralSectors);
-            sectorPanel.add(dropdown2);
-            controlPanel.add(sectorPanel);
-        }else if(zone.equals("WEST SAN JOSE")){
-            sectorPanel = new JPanel();
-            String[] centralSectors = {"HYDE PARK", "NORTHSIDE", "JAPANTOWN", "CIVIC CENTER", "COLEMAN", "THE ALAMEDA", "ROSE GARDEN", "SHASTA-HANCHETT PARK", "ST. LEO'S", "WEST SAN CARLOS", "MIDTOWN", "WASHINGTON-GUADALUPE", "TAMIEN", "ALMA", "SPARTAN KEYES", "NAGLEE PARK", "DOWNTOWN"};
-            dropdown2 = new JComboBox<>(centralSectors);
-            sectorPanel.add(dropdown2);
-            controlPanel.add(sectorPanel);
-        }else{
-            return null;
-        }
-        Object location = dropdown2.getSelectedItem();
-        String selectedLocation = (String) location;
-        return selectedLocation;
+        return zone;
     }
 
     //private voi
