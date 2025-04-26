@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class MenstrualEquityPanel extends AppPanel {
     JPanel langPanel;
-    JPanel zonePanel;
+    JPanel sectorPanel;
     public MenstrualEquityPanel(AppFactory factory) {
         super(factory);
         this.factory = factory;
@@ -32,7 +32,7 @@ public class MenstrualEquityPanel extends AppPanel {
     }
 
     private void selectLocation(){
-        zonePanel = new JPanel();
+        sectorPanel = new JPanel();
         String[] langOptions = {"Central San Jose", "North San Jose", "West San Jose", "South San Jose", "East San Jose"};
         JComboBox<String> dropdown = new JComboBox<>(langOptions);
         zonePanel.add(dropdown);
