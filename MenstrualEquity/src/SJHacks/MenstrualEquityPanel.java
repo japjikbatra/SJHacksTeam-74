@@ -5,6 +5,7 @@ import MVCFramework.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class MenstrualEquityPanel extends AppPanel {
     MenstrualEquity menstrualEquity;
@@ -52,7 +53,7 @@ public class MenstrualEquityPanel extends AppPanel {
 
             String selectedValue = dropdown.getSelectedItem().toString();
             System.out.println(selectedValue);
-            menstrualEquity.addLocation();
+            ArrayList<Location> locations = menstrualEquity.getLocations(selectedValue);
 
 
             String cmmd = ae.getActionCommand();
