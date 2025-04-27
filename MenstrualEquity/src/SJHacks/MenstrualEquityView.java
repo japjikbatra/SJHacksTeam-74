@@ -16,6 +16,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class MenstrualEquityView extends View {
+    private JMapViewer mapViewer;
+    private MenstrualEquity menstrualEquity;
     public MenstrualEquityView(Model model) {
         super(model);
         System.setProperty("http.agent", "MenstrualEquityApp/1.0 (japji.batra@sjsu.edu)");
@@ -98,5 +100,17 @@ public class MenstrualEquityView extends View {
                 JOptionPane.showMessageDialog(this, "Error searching address.");
             }
         });
+    }
+    //FIX IT: show the markers for addresses
+    public void showMarkersForZone(String zoneName) {
+        mapViewer.removeAllMapMarkers();
+
+        ArrayList<Location> locations = menstrualEquity.getLocations(zoneName);
+
+        for (Location loc : locations) {
+            if (loc.getCoordinate() != null) {
+                mapViewer.addMapMarker(new MapMarkerDot(loc.getCoordinate()));
+            }
+        }
     }
 }
