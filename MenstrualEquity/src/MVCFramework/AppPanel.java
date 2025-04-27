@@ -69,8 +69,8 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         //result.add(fileMenu);
         //JMenu editMenu = Utilities.makeMenu("Edit", factory.getEditCommands(), this);
         //result.add(editMenu);
-        JMenu setLanguage = Utilities.makeMenu("Set Language",  new String[]{"English", "Spanish"}, this);
-        result.add(setLanguage);
+        //JMenu setLanguage = Utilities.makeMenu("Set Language",  new String[]{"English", "Spanish"}, this);
+        //result.add(setLanguage);
         //JMenu newLocation = Utilities
         JMenu helpMenu = Utilities.makeMenu("Help", new String[] {"About", "Help"}, this);
         result.add(helpMenu);

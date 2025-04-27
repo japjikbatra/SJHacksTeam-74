@@ -4,15 +4,17 @@ import Customizations.MineFieldFactory;
 import MVCFramework.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class MenstrualEquityPanel extends AppPanel {
-    MenstrualEquity menstrualEquity;
+    //MenstrualEquity menstrualEquity;
     JPanel langPanel;
     JPanel sectorPanel;
     JPanel zonePanel;
     JComboBox<String> dropdown;
+    MenstrualEquity menstrualEquity;
     public MenstrualEquityPanel(AppFactory factory) {
         super(factory);
         this.factory = factory;
@@ -22,6 +24,7 @@ public class MenstrualEquityPanel extends AppPanel {
         //String genericLocation = Utilities.ask("Which region of San Jose?");
         //String language = selectLanguage();
         String location = selectLocation();
+        menstrualEquity = (MenstrualEquity) model;
     }
 
     private String selectLanguage(){
@@ -47,27 +50,31 @@ public class MenstrualEquityPanel extends AppPanel {
         return zone;
     }
 
+    private void displayLocations(ArrayList<Location> locations){
+        JPanel panel = new JPanel();
+        for(Location L: locations){
+            JButton loc = new JButton(L.getAddress().toString());
+            loc.addActionListener(this);
+            panel.add(loc);
+            panel.setLayout(new GridLayout(1, locations.size()));
+            view.add(panel);
+        }
+    }
     @Override
     public void actionPerformed(ActionEvent ae) {
+        String cmmd = ae.getActionCommand();
+        System.out.println(cmmd);
         try {
-
+        if (cmmd.equals("About")) {
+            Utilities.inform(factory.about());
+        } else if (cmmd.equals("Help")) {
+            Utilities.inform(factory.getHelp());
+        }else{
             String selectedValue = dropdown.getSelectedItem().toString();
             System.out.println(selectedValue);
             ArrayList<Location> locations = menstrualEquity.getLocations(selectedValue);
-
-
-            String cmmd = ae.getActionCommand();
-
-
-            if (cmmd.equals("About")) {
-                Utilities.inform(factory.about());
-            } else if (cmmd.equals("Help")) {
-                Utilities.inform(factory.getHelp());
-            } else {
-                Command command = factory.makeEditCommands(model, cmmd, ae.getSource());
-                command.execute();
-                repaint();
-            }
+            displayLocations(locations);
+        }
         } catch (Exception e) {
             handleException(e);
         }
