@@ -18,6 +18,8 @@ public class MenstrualEquityPanel extends AppPanel {
     public MenstrualEquityPanel(AppFactory factory) {
         super(factory);
         this.factory = factory;
+
+        ImageIcon icon = new ImageIcon("images/menstrual.png");
         topPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
         JLabel question = new JLabel("Please Select A Location");
@@ -64,7 +66,7 @@ public class MenstrualEquityPanel extends AppPanel {
 
         for (Location loc : locations) {
             JButton button = new JButton(loc.getAddress());
-            button.setActionCommand("stats");
+            button.setActionCommand(loc.getAddress());
             button.addActionListener(this);
             buttonPanel.add(button);
             buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -89,15 +91,27 @@ public class MenstrualEquityPanel extends AppPanel {
                 Utilities.inform(factory.getHelp());
             }else{
                 String selectedValue = dropdown.getSelectedItem().toString();
-                System.out.println(selectedValue);
-                ArrayList<Location> locations = menstrualEquity.getLocations(selectedValue);
-                displayLocations(locations);
+                ArrayList<Location> locationList = menstrualEquity.getLocations(selectedValue);
+                for(Location loc : locationList){
+                    if(loc.getAddress().equals(cmmd)){
+                        showLocationInfo(loc);
+                    }
+                }
+                displayLocations(locationList);
             }
         } catch (Exception e) {
             handleException(e);
         }
     }
+    private void showLocationInfo(Location loc) {
+        String info = "Address: " + loc.getAddress() + "\n"
+                + "Pads Available: " + (loc.hasPads() ? "Yes" : "No") + "\n"
+                + "Tampons Available: " + (loc.hasTampons() ? "Yes" : "No") + "\n"
+                + "Notes: " + loc.getAdditionalFacilities() + "\n"
+                + "Hours: " + loc.getHours();
 
+        JOptionPane.showMessageDialog(this, info, "Location Info", JOptionPane.INFORMATION_MESSAGE);
+    }
     public static void main(String[] args){
         FRAME_HEIGHT = 500;
         FRAME_WIDTH = 1000;
