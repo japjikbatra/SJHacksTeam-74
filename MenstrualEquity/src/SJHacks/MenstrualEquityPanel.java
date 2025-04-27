@@ -5,21 +5,18 @@ import MVCFramework.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 public class MenstrualEquityPanel extends AppPanel {
-    //MenstrualEquity menstrualEquity;
-    //JPanel langPanel;
+
     JPanel topPanel;
-    JPanel zonePanel;
     JComboBox<String> dropdown;
     JPanel buttonPanel;
     MenstrualEquity menstrualEquity;
     public MenstrualEquityPanel(AppFactory factory) {
         super(factory);
         this.factory = factory;
-
-        ImageIcon icon = new ImageIcon("images/menstrual.png");
         topPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
         JLabel question = new JLabel("Please Select A Location");
@@ -28,16 +25,13 @@ public class MenstrualEquityPanel extends AppPanel {
         //String language = Utilities.ask("Please Select A Language.");
         //String genericLocation = Utilities.ask("Which region of San Jose?");
         //String language = selectLanguage();
-
         String location = selectLocation();
         menstrualEquity = (MenstrualEquity) model;
-
         buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        buttonPanel.setLayout(new GridLayout(0, 1)); // One column, flexible rows
-        controlPanel.add(new JScrollPane(buttonPanel));
+        buttonPanel.setPreferredSize(new Dimension(400, 500));
+        buttonPanel.setLayout(new GridLayout(0, 1));
+        controlPanel.add(buttonPanel);
     }
-
     /*private String selectLanguage(){
         langPanel = new JPanel();
         String[] langOptions = {"English", "Spanish", "Punjabi"};
@@ -50,12 +44,10 @@ public class MenstrualEquityPanel extends AppPanel {
     }*/
 
     private String selectLocation(){
-        //zonePanel = new JPanel();
         String[] zoneOptions = {"ALVISO", "BERRYESSA", "RINCONGOLDENTRIANGLE", "RINCONSOUTH", "AIRPORT", "ALUMROCK", "EVERGREEN", "SILVERCREEKVALLEY", "LITTLEPORTUGAL", "OLINDERBONITA", "LITTLESAIGON", "STORYANDKING", "YERBABUENA", "MCLAUGHLIN", "NORTHMONTEREY", "SEVENTREEW", "EDENVALE", "BASKINGRIDGE", "SANTATERESA", "BLOSSOMVALLEY", "ALMADEN", "CANOAS", "COMMUNICATIONSHILL", "WILLOWGLEN", "CAMBRIAN", "BASCOM", "FRUITDALE", "WINCHESTER", "PASEODESARATOGA", "CALABAZAS", "STEVENSCREEK", "SANTANAROWVALLEYFAIR", "DOWNTOWN", "ALMA", "COLEMAN", "CIVICCENTER", "HYDEPARK", "JAPANTOWN", "MIDTOWN", "NAGLEEPARK", "NORTHSIDE", "SPARTANKEYES", "SANTOMASAQUINO", "TAMIEN", "THEALAMEDA", "WASHINGTONGUADALUPE", "STLEOS", "ROSEGARDEN", "SHASTAHANCHETTPARK"};
         dropdown = new JComboBox<>(zoneOptions);
         topPanel.add(dropdown);
         dropdown.addActionListener(this);
-        //controlPanel.add(Panel);
         Object selected = dropdown.getSelectedItem();
         String zone = (String) selected;
         return zone;
@@ -69,11 +61,8 @@ public class MenstrualEquityPanel extends AppPanel {
             button.setActionCommand(loc.getAddress());
             button.addActionListener(this);
             buttonPanel.add(button);
-            buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-            // Set button size and alignment
-            button.setMaximumSize(new Dimension(300, 40)); // fixed width/height
+            button.setMaximumSize(new Dimension(300, 200)); // fixed width/height
             button.setAlignmentX(Component.LEFT_ALIGNMENT); // align to left
-
 
         }
 
@@ -100,7 +89,7 @@ public class MenstrualEquityPanel extends AppPanel {
                 displayLocations(locationList);
             }
         } catch (Exception e) {
-            handleException(e);
+            Utilities.inform("No locations available");
         }
     }
     private void showLocationInfo(Location loc) {
