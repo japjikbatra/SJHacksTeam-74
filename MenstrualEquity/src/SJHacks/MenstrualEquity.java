@@ -11,6 +11,12 @@ public class MenstrualEquity extends Model {
 
     public MenstrualEquity() {
         super();
+        initializeDataBase();
+        
+    }
+    private void initializeDataBase(){
+        locations = new HashMap<>();
+        Location berry = new Location("3050 Berryessa Rd",Sector.BERRYESSA,false, true,"None" );
     }
     public void addLocation(Location loc){
         locations.put(loc.getSector(),loc);
