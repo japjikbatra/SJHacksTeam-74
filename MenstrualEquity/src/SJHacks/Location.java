@@ -1,5 +1,7 @@
 package SJHacks;
 
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+
 public class Location {
     private String address;
     private boolean pads;
@@ -7,6 +9,7 @@ public class Location {
     private String additionalFacilities;
     private Sector sector;
     private String hours;
+    private Coordinate coordinate;
 
     public Location(String address, Sector sector) {
         this.address = address;
@@ -18,13 +21,14 @@ public class Location {
 
 
     }
-    public Location(String address, Sector sector, boolean pads, boolean tampons, String additionalFacilities, String hours) {
+    public Location(String address, Sector sector, boolean pads, boolean tampons, String additionalFacilities, String hours, Coordinate coord) {
         this.address = address;
         this.sector = sector;
         this.pads = pads;
         this.tampons = tampons;
         this.additionalFacilities = additionalFacilities;
         this.hours = hours;
+        this.coordinate = coord;
     }
     public String getAddress() {
         return this.address;
@@ -52,6 +56,9 @@ public class Location {
     }
     public String getHours() {
         return hours;
+    }
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
 
