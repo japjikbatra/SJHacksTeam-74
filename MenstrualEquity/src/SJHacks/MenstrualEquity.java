@@ -7,34 +7,30 @@ import java.util.*;
 public class MenstrualEquity extends Model {
 
     private String language;
-    protected HashMap<Sector,Location> locations;
+    protected HashMap<Sector,ArrayList<Location>> locations;
 
     public MenstrualEquity() {
         super();
         initializeDataBase();
 
     }
-    private void initializeDataBase(){
+    private void initializeDataBase() {
         locations = new HashMap<>();
-        Location berry = new Location("3050 Berryessa Rd",Sector.BERRYESSA,false, true,"None" );
-        locations.put(berry.getSector(), berry);
+
+        addLocation(new Location("3050 Berryessa Rd", Sector.BERRYESSA, false, true, "None"));
+        addLocation(new Location("3355 Noble Ave", Sector.BERRYESSA, true, true, "None"));
+        addLocation(new Location("123 Alviso St", Sector.ALVISO, false, true, "Pads available"));
+        // etc.
     }
-    public void addLocation(Location loc){
-        locations.put(loc.getSector(),loc);
-        changed();
-    }
-    public Location getLocation(Sector sector){
-        return locations.get(sector);
+    private void addLocation(Location loc) {
+        locations.computeIfAbsent(loc.getSector(), k -> new ArrayList<>()).add(loc);
     }
 
-    public ArrayList<Location> getLocations(String sec){
-        ArrayList<Location> locs = new ArrayList<>();
-        for (Sector key : locations.keySet()) {
-            if(key.name().equalsIgnoreCase(sec) ){
-                locs.add(locations.get(key));
-            }
-        }
-        return locs;
+
+
+    public ArrayList<Location> getLocations(String sec) {
+        Sector sector = Sector.valueOf(sec);
+        return locations.get(sector);
     }
 
 
