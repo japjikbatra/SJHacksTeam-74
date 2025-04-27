@@ -44,6 +44,19 @@ public class MenstrualEquity extends Model {
         addLocation(new Location("Del Monte Park - 806 W Home St", Sector.NORTHMONTEREY, true, true, "None"));
         addLocation(new Location("Willow Street Frank Bramhall Park - 1320 Willow St", Sector.NORTHMONTEREY, true, true, "None"));
 
+        //West SJ
+        addLocation(new Location("Cambrian Branch Library - 1780 Hillsdale Ave.", Sector.CAMBRIAN, true, true, "Changing station available"));
+        addLocation(new Location("Houge Park - Twilight Drive & White Oaks Ave", Sector.CAMBRIAN, true, true, "None"));
+        addLocation(new Location("Doerr Park - Potrero Dr & Park Wilshire Dr", Sector.CAMBRIAN, true, true, "None"));
+        addLocation(new Location("Willow Glen Branch Library - 1157 Minnesota Ave", Sector.WILLOWGLEN, true, true, "Changing station available"));
+        addLocation(new Location("Willow Glen Community Center - 2175 Lincoln Ave", Sector.WILLOWGLEN, true, true, "None"));
+        addLocation(new Location("Lincoln Glen Park - Curtner Ave & Radio Ave", Sector.WILLOWGLEN, true, true, "None"));
+        addLocation(new Location("Marijane Hamann Park - 2747 Westfield Ave", Sector.FRUITDALE, true, true, "None"));
+        addLocation(new Location("Bascom Branch Library - 1000 S Bascom Ave", Sector.BASCOM, true, true, "Changing station available"));
+        addLocation(new Location("Stevens Creek County Park - 11401 Stevens Canyon Rd", Sector.STEVENSCREEK, true, true, "None"));
+        addLocation(new Location("Calabazas Branch Library - 1230 S Blaney Ave", Sector.CALABAZAS, true, true, "Changing station available"));
+        addLocation(new Location("Calabazas Park - 6852 Rainbow Dr", Sector.CALABAZAS, true, true, "None"));
+        addLocation(new Location("West Valley Branch Library - 1243 San Tomas Aquino Rd", Sector.PASEODESARATOGA, true, true, "Changin stations available"));
     }
     private void addLocation(Location loc) {
         locations.computeIfAbsent(loc.getSector(), k -> new ArrayList<>()).add(loc);
