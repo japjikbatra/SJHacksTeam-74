@@ -1,6 +1,7 @@
 package SJHacks;
 
 import MVCFramework.Model;
+import org.openstreetmap.gui.jmapviewer.Coordinate;
 
 import java.util.*;
 
