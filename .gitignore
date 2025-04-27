@@ -12,6 +12,8 @@
 
 # Package Files #
 *.jar
+!lib/JMapViewer-1.14.1.jar
+
 *.war
 *.nar
 *.ear
