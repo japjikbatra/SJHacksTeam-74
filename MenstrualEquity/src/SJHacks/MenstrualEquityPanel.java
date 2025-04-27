@@ -22,17 +22,19 @@ public class MenstrualEquityPanel extends AppPanel {
         super(factory);
         this.factory = factory;
         topPanel = new JPanel();
+        topPanel.setBackground(Color.decode("#f2ceed")); // color light pink!
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
         JLabel question = new JLabel("Please Select A Location");
         topPanel.add(question);
         controlPanel.add(topPanel);
-         menstrualEquityView = (MenstrualEquityView) view;
+        menstrualEquityView = (MenstrualEquityView) view;
         //String language = Utilities.ask("Please Select A Language.");
         //String genericLocation = Utilities.ask("Which region of San Jose?");
         //String language = selectLanguage();
         String location = selectLocation();
         menstrualEquity = (MenstrualEquity) model;
         buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.decode("#3a3ae8"));  // color royal blue!
         buttonPanel.setPreferredSize(new Dimension(400, 500));
         buttonPanel.setLayout(new GridLayout(0, 1));
         controlPanel.add(buttonPanel);
