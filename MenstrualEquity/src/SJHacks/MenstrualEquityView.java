@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class MenstrualEquityView extends View {
     private JMapViewer mapViewer;
     private MenstrualEquity menstrualEquity;
+
     public MenstrualEquityView(Model model) {
         super(model);
         System.setProperty("http.agent", "MenstrualEquityApp/1.0 (japji.batra@sjsu.edu)");
@@ -102,25 +103,51 @@ public class MenstrualEquityView extends View {
             }
         });
     }
+    private int getBestZoom(double minLat, double maxLat, double minLon, double maxLon) {
+        double latDiff = maxLat - minLat;
+        double lonDiff = maxLon - minLon;
+
+        double maxDiff = Math.max(latDiff, lonDiff);
+
+        if (maxDiff < 0.01) return 16;
+        else if (maxDiff < 0.05) return 14;
+        else if (maxDiff < 0.1) return 13;
+        else if (maxDiff < 0.5) return 12;
+        else return 11; // Zoomed out for wide spread
+    }
     //FIX IT: show the markers for addresses
-      public void showMarkersPerZone(String zoneName) {
+    public void showMarkersPerZone(String zoneName) {
         mapViewer.removeAllMapMarkers();
-          boolean zoomed = false;
 
         ArrayList<Location> locations = menstrualEquity.getLocations(zoneName);
 
+        if (locations == null || locations.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No locations found for zone: " + zoneName);
+            return;
+        }
+
+        double minLat = Double.MAX_VALUE;
+        double maxLat = -Double.MAX_VALUE;
+        double minLon = Double.MAX_VALUE;
+        double maxLon = -Double.MAX_VALUE;
+
         for (Location loc : locations) {
-            if (loc.getCoordinate() != null) {
-                mapViewer.addMapMarker(new MapMarkerDot(loc.getCoordinate()));
-                if (!zoomed) {
-                    // Zoom to the first location with a valid coordinate
-                    mapViewer.setDisplayPosition(loc.getCoordinate(), 14);
-                    zoomed = true;
-                }
+            Coordinate coord = loc.getCoordinate();
+            if (coord != null) {
+                mapViewer.addMapMarker(new MapMarkerDot(coord));
+
+                // Update bounding box
+                minLat = Math.min(minLat, coord.getLat());
+                maxLat = Math.max(maxLat, coord.getLat());
+                minLon = Math.min(minLon, coord.getLon());
+                maxLon = Math.max(maxLon, coord.getLon());
             }
         }
-          if (!zoomed) {
-              JOptionPane.showMessageDialog(this, "No valid coordinates found for zone: " + zoneName);
-          }
+
+        // Center of bounding box
+        double centerLat = (minLat + maxLat) / 2;
+        double centerLon = (minLon + maxLon) / 2;
+
+        mapViewer.setDisplayPosition(new Coordinate(centerLat, centerLon), getBestZoom(minLat, maxLat, minLon, maxLon));
     }
 }

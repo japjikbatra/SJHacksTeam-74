@@ -71,7 +71,6 @@ public class MenstrualEquityPanel extends AppPanel {
             buttonPanel.add(button);
             button.setMaximumSize(new Dimension(300, 200)); // fixed width/height
             button.setAlignmentX(Component.LEFT_ALIGNMENT); // align to left
-
         }
 
         buttonPanel.revalidate();
@@ -80,7 +79,6 @@ public class MenstrualEquityPanel extends AppPanel {
     @Override
     public void actionPerformed(ActionEvent ae) {
         String cmmd = ae.getActionCommand();
-        System.out.println(cmmd);
         try {
             if (cmmd.equals("About")) {
                 Utilities.inform(factory.about());
