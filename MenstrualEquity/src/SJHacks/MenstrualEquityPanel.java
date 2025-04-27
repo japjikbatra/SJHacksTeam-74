@@ -17,6 +17,7 @@ public class MenstrualEquityPanel extends AppPanel {
     JComboBox<String> dropdown;
     JPanel buttonPanel;
     MenstrualEquity menstrualEquity;
+    MenstrualEquityView menstrualEquityView;
     public MenstrualEquityPanel(AppFactory factory) {
         super(factory);
         this.factory = factory;
@@ -25,6 +26,7 @@ public class MenstrualEquityPanel extends AppPanel {
         JLabel question = new JLabel("Please Select A Location");
         topPanel.add(question);
         controlPanel.add(topPanel);
+         menstrualEquityView = (MenstrualEquityView) view;
         //String language = Utilities.ask("Please Select A Language.");
         //String genericLocation = Utilities.ask("Which region of San Jose?");
         //String language = selectLanguage();
@@ -51,6 +53,7 @@ public class MenstrualEquityPanel extends AppPanel {
         dropdown = new JComboBox<>(zoneOptions);
         topPanel.add(dropdown);
         dropdown.addActionListener(this);
+
         Object selected = dropdown.getSelectedItem();
         String zone = (String) selected;
         return zone;
@@ -90,6 +93,7 @@ public class MenstrualEquityPanel extends AppPanel {
                     }
                 }
                 displayLocations(locationList);
+                menstrualEquityView.showMarkersPerZone(selectedValue);
             }
         } catch (Exception e) {
             Utilities.inform("No locations available");

@@ -24,9 +24,10 @@ public class MenstrualEquityView extends View {
 
         // Set layout so components display correctly
         this.setLayout(new BorderLayout());
+        this.menstrualEquity = (MenstrualEquity)model;
 
         // Create map viewer and configure it
-        JMapViewer mapViewer = new JMapViewer();
+        mapViewer = new JMapViewer();
         mapViewer.setDisplayPosition(new Coordinate(37.3394, -121.8863), 12);
         mapViewer.addMapMarker(new MapMarkerDot(37.3394, -121.8863));
 
@@ -102,15 +103,24 @@ public class MenstrualEquityView extends View {
         });
     }
     //FIX IT: show the markers for addresses
-    public void showMarkersForZone(String zoneName) {
+      public void showMarkersPerZone(String zoneName) {
         mapViewer.removeAllMapMarkers();
+          boolean zoomed = false;
 
         ArrayList<Location> locations = menstrualEquity.getLocations(zoneName);
 
         for (Location loc : locations) {
             if (loc.getCoordinate() != null) {
                 mapViewer.addMapMarker(new MapMarkerDot(loc.getCoordinate()));
+                if (!zoomed) {
+                    // Zoom to the first location with a valid coordinate
+                    mapViewer.setDisplayPosition(loc.getCoordinate(), 14);
+                    zoomed = true;
+                }
             }
         }
+          if (!zoomed) {
+              JOptionPane.showMessageDialog(this, "No valid coordinates found for zone: " + zoneName);
+          }
     }
 }
