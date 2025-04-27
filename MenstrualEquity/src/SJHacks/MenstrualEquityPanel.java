@@ -6,7 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.net.URL;
+
 
 public class MenstrualEquityPanel extends AppPanel {
 
@@ -102,6 +105,14 @@ public class MenstrualEquityPanel extends AppPanel {
         JOptionPane.showMessageDialog(this, info, "Location Info", JOptionPane.INFORMATION_MESSAGE);
     }
     public static void main(String[] args){
+        try{
+            File libDir = new File("lib");
+            URL[] classLoaderUrls = {libDir.toURI().toURL()};
+            URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
+            Thread.currentThread().setContextClassLoader(urlClassLoader);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         FRAME_HEIGHT = 500;
         FRAME_WIDTH = 1000;
         AppPanel app = new MenstrualEquityPanel(new MenstrualEquityFactory());

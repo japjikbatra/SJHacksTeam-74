@@ -6,7 +6,13 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 
+import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class MenstrualEquityView extends View {
     public MenstrualEquityView(Model model) {
@@ -23,5 +29,55 @@ public class MenstrualEquityView extends View {
 
         // Add the map to this view panel
         this.add(mapViewer, BorderLayout.CENTER);
+
+        JTextField addressField = new JTextField();
+        JButton searchButton = new JButton("Search");
+
+        JPanel searchPanel = new JPanel(new BorderLayout());
+        searchPanel.add(addressField, BorderLayout.CENTER);
+        searchPanel.add(searchButton, BorderLayout.EAST);
+
+        this.add(searchPanel, BorderLayout.NORTH);
+
+        searchButton.addActionListener(e -> {
+            try {
+                String address = URLEncoder.encode(addressField.getText(), "UTF-8");
+                String urlStr = "https://nominatim.openstreetmap.org/search?q=" + address + "&format=json";
+
+                URL url = new URL(urlStr);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("User-Agent", "MenstrualEquityApp/1.0 (japji.batra@sjsu.edu)");
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+
+                // ✅ SUPER BASIC parsing (not robust, but works for 1st result)
+                String json = response.toString();
+                int latIndex = json.indexOf("\"lat\":\"");
+                int lonIndex = json.indexOf("\"lon\":\"");
+                if (latIndex != -1 && lonIndex != -1) {
+                    int latEnd = json.indexOf("\"", latIndex + 7);
+                    int lonEnd = json.indexOf("\"", lonIndex + 7);
+
+                    double lat = Double.parseDouble(json.substring(latIndex + 7, latEnd));
+                    double lon = Double.parseDouble(json.substring(lonIndex + 7, lonEnd));
+
+                    Coordinate coord = new Coordinate(lat, lon);
+                    mapViewer.setDisplayPosition(coord, 12);
+                    mapViewer.addMapMarker(new MapMarkerDot(coord));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Address not found.");
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error searching address.");
+            }
+        });
     }
 }
