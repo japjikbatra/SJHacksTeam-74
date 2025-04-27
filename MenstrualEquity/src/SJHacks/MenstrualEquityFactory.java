@@ -18,17 +18,17 @@ public class MenstrualEquityFactory implements AppFactory {
 
     @Override
     public String getTitle() {
-        return "MenstrualEquityApp";
+        return "SJLunaria";
     }
 
     @Override
     public String[] getHelp() {
-        return new String[]{""};
+        return new String[]{"Input your known general location on the drop down and select from the given list for specific information. Look on the map for help!"};
     }
 
     @Override
     public String about() {
-        return "";
+        return "Help find nearest locations or restrooms and get updates on menstrual product availability. Just input your general location in San Jose!";
     }
 
     @Override
