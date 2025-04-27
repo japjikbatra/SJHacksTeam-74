@@ -54,11 +54,16 @@ public class MenstrualEquityPanel extends AppPanel {
         JPanel panel = new JPanel();
         for(Location L: locations){
             JButton loc = new JButton(L.getAddress().toString());
+            loc.setActionCommand(L.getAddress().toString());  // Set a unique command for each location button
             loc.addActionListener(this);
             panel.add(loc);
             panel.setLayout(new GridLayout(1, locations.size()));
-            view.add(panel);
+            controlPanel.add(panel, BorderLayout.CENTER);
+            view.repaint();
+            model.changed();
+            update();
         }
+        model.changed();
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
