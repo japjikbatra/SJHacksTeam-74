@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class MenstrualEquityView extends View {
     public MenstrualEquityView(Model model) {
@@ -38,6 +39,25 @@ public class MenstrualEquityView extends View {
         searchPanel.add(searchButton, BorderLayout.EAST);
 
         this.add(searchPanel, BorderLayout.NORTH);
+/*
+        // Sample locations (to be dynamically fetched or added)
+        ArrayList<Location> locations = new ArrayList<>();
+        locations.add(new Location("Almaden Lake Park - 6099 Winfield Blvd", new Coordinate(37.2530, -121.8644)));
+        locations.add(new Location("Almaden Community Center - 6445 Camden Ave", new Coordinate(37.2535, -121.8785)));
+        locations.add(new Location("Almaden Branch Library - 6445 Camden Ave", new Coordinate(37.2518, -121.8801)));
+
+        // Add buttons for locations and markers to the map
+        for (Location loc : locations) {
+            JButton button = new JButton(loc.getAddress());
+            button.setActionCommand(loc.getAddress());
+            button.addActionListener(e -> {
+                // Zoom to location when button is clicked
+                mapViewer.setDisplayPosition(loc.getCoordinate(), 14);
+                mapViewer.addMapMarker(new MapMarkerDot(loc.getCoordinate()));
+            });
+            searchPanel.add(button, BorderLayout.SOUTH);
+        }
+*/
 
         searchButton.addActionListener(e -> {
             try {
@@ -56,7 +76,6 @@ public class MenstrualEquityView extends View {
                 }
                 reader.close();
 
-                // ✅ SUPER BASIC parsing (not robust, but works for 1st result)
                 String json = response.toString();
                 int latIndex = json.indexOf("\"lat\":\"");
                 int lonIndex = json.indexOf("\"lon\":\"");
